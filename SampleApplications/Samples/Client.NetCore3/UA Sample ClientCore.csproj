@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>UA_Sample_ClientCore</RootNamespace>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Opc.Ua.SampleClient.Config.xml" />
+    <None Remove="Opc.Ua.SampleClient.Endpoints.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Opc.Ua.SampleClient.Config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Opc.Ua.SampleClient.Endpoints.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Stack\Opc.Ua.Core\Opc.Ua.Core.csproj" />
+    <ProjectReference Include="..\..\SDK\Opc.Ua.Client\Opc.Ua.Client.csproj" />
+    <ProjectReference Include="..\..\SDK\Opc.Ua.Configuration\Opc.Ua.Configuration.csproj" />
+    <ProjectReference Include="..\..\SDK\Opc.Ua.Server\Opc.Ua.Server.csproj" />
+    <ProjectReference Include="..\ClientControls.Net4\UA Client Controls.csproj" />
+    <ProjectReference Include="..\Controls.Net4\UA Sample Controls.csproj" />
+    <ProjectReference Include="..\Opc.Ua.Sample\Opc.Ua.Sample.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -3,8 +3,9 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <RootNamespace>UA_Sample_ClientCore</RootNamespace>
+    <RootNamespace>Opc.Ua.Sample</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>Opc.Ua.SampleClient</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,8 +31,8 @@
     <ProjectReference Include="..\..\SDK\Opc.Ua.Client\Opc.Ua.Client.csproj" />
     <ProjectReference Include="..\..\SDK\Opc.Ua.Configuration\Opc.Ua.Configuration.csproj" />
     <ProjectReference Include="..\..\SDK\Opc.Ua.Server\Opc.Ua.Server.csproj" />
-    <ProjectReference Include="..\ClientControls.Net4\UA Client Controls.csproj" />
-    <ProjectReference Include="..\Controls.Net4\UA Sample Controls.csproj" />
+    <ProjectReference Include="..\ClientControls.NetCore3\UA Client ControlsCore.csproj" />
+    <ProjectReference Include="..\Controls.NetCore3\UA Sample ControlsCore.csproj" />
     <ProjectReference Include="..\Opc.Ua.Sample\Opc.Ua.Sample.csproj" />
   </ItemGroup>
 

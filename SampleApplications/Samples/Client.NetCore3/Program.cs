@@ -37,45 +37,45 @@ namespace Opc.Ua.Sample
 {
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+        ///// <summary>
+        ///// The main entry point for the application.
+        ///// </summary>
+        //[STAThread]
+        //static void Main()
+        //{
+        //    Application.EnableVisualStyles();
+        //    Application.SetCompatibleTextRenderingDefault(false);
 
-            ApplicationInstance.MessageDlg = new ApplicationMessageDlg();
-            ApplicationInstance application = new ApplicationInstance();
-            application.ApplicationName   = "UA Sample Client";
-            application.ApplicationType   = ApplicationType.ClientAndServer;
-            application.ConfigSectionName = "Opc.Ua.SampleClient";
+        //    ApplicationInstance.MessageDlg = new ApplicationMessageDlg();
+        //    ApplicationInstance application = new ApplicationInstance();
+        //    application.ApplicationName   = "UA Sample Client";
+        //    application.ApplicationType   = ApplicationType.ClientAndServer;
+        //    application.ConfigSectionName = "Opc.Ua.SampleClient";
 
-            // use a custom transport channel
-            WcfChannelBase.g_CustomTransportChannel = new CustomTransportChannelFactory();
+        //    // use a custom transport channel
+        //    WcfChannelBase.g_CustomTransportChannel = new CustomTransportChannelFactory();
 
-            try
-            {
-                application.LoadApplicationConfiguration(false).Wait();
+        //    try
+        //    {
+        //        application.LoadApplicationConfiguration(false).Wait();
 
-                // check the application certificate.
-                bool certOK = application.CheckApplicationInstanceCertificate(false, 0).Result;
-                if (!certOK)
-                {
-                    throw new Exception("Application instance certificate invalid!");
-                }
+        //        // check the application certificate.
+        //        bool certOK = application.CheckApplicationInstanceCertificate(false, 0).Result;
+        //        if (!certOK)
+        //        {
+        //            throw new Exception("Application instance certificate invalid!");
+        //        }
 
-                // start the server.
-                application.Start(new SampleServer()).Wait();
+        //        // start the server.
+        //        application.Start(new SampleServer()).Wait();
 
-                // run the application interactively.
-                Application.Run(new SampleClientForm(application, null, application.ApplicationConfiguration));
-            }
-            catch (Exception e)
-            {
-                ExceptionDlg.Show(application.ApplicationName, e);
-            }
-        }
+        //        // run the application interactively.
+        //        Application.Run(new SampleClientForm(application, null, application.ApplicationConfiguration));
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        ExceptionDlg.Show(application.ApplicationName, e);
+        //    }
+        //}
     }
 }

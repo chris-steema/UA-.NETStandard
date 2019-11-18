@@ -93,7 +93,7 @@ namespace NetCoreConsoleClient
             if (extraArgs.Count == 0)
             {
                 // use OPC UA .Net Sample server 
-                endpointURL = "opc.tcp://192.168.1.232:51210/UA/SampleServer";
+                endpointURL = "opc.tcp://167.172.162.22:51210/UA/SampleServer";
             }
             else
             {

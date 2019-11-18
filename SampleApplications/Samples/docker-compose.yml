@@ -1,0 +1,13 @@
+version: '3.0'
+ 
+services:
+
+  visamicopcserver:
+    image: steema/visamic:opcserver1.0
+    build:
+      context: .
+      dockerfile: "Dockerfile.opcserver"
+    ports:
+      - "51210:51210"
+      - "51212:51212"   
+      - "4840:4840"  

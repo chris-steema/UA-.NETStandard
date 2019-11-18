@@ -83,7 +83,7 @@ namespace NetCoreConsoleServer
             // command line options
             bool showHelp = false;
             int stopTimeout = 0;
-            bool autoAccept = false;
+            bool autoAccept = true; //CDI set to true by default
 
             Mono.Options.OptionSet options = new Mono.Options.OptionSet {
                 { "h|help", "show this message and exit", h => showHelp = h != null },

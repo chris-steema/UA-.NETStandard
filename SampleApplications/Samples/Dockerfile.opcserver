@@ -3,11 +3,13 @@ FROM mcr.microsoft.com/dotnet/core/sdk:2.2 as build-image
 WORKDIR /home/app
 
 COPY ./NetCoreConsoleServer/NetCoreConsoleServer.csproj ./NetCoreConsoleServer/
+COPY ./Opc.Ua.SampleCore/Opc.Ua.SampleCore.csproj ./Opc.Ua.SampleCore/
 COPY ./NetCoreConsoleServer.sln .
 
 RUN dotnet restore
 
 COPY ./NetCoreConsoleServer/. ./NetCoreConsoleServer/
+COPY ./Opc.Ua.SampleCore/. ./Opc.Ua.SampleCore/
 
 RUN dotnet publish ./NetCoreConsoleServer/NetCoreConsoleServer.csproj -c Release -o /publish/
 

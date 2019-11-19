@@ -179,7 +179,7 @@ namespace NetCoreConsoleClient
 				monitoredItem.AttributeId = Attributes.Value;
 				monitoredItem.SamplingInterval = 0;
 				monitoredItem.QueueSize = 1;
-				monitoredItem.Notification += OnNotification;
+				//monitoredItem.Notification += OnNotification;
 
 				// add condition fields to any event filter.
 				EventFilter filter = monitoredItem.Filter as EventFilter;
@@ -312,7 +312,10 @@ namespace NetCoreConsoleClient
 
 			Subscribe(subscription, simulation);
 
-			session.AddSubscription(subscription);
+            session.Notification += Session_Notification;
+
+
+      session.AddSubscription(subscription);
 
 			subscription.Create();
 
@@ -339,7 +342,13 @@ namespace NetCoreConsoleClient
 			exitCode = ExitCode.ErrorRunning;
 		}
 
-		private void Client_KeepAlive(Session sender, KeepAliveEventArgs e)
+        private void Session_Notification(Session session, NotificationEventArgs e)
+        {
+            
+            Console.WriteLine($"Publish Time => {e.NotificationMessage.PublishTime.ToString() }");
+        }
+
+        private void Client_KeepAlive(Session sender, KeepAliveEventArgs e)
 		{
 			if (e.Status != null && ServiceResult.IsNotGood(e.Status))
 			{

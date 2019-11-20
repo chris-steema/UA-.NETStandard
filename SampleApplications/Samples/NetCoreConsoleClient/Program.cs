@@ -168,14 +168,40 @@ namespace NetCoreConsoleClient
 
 		private async Task ConsoleSampleClient()
 		{
-			void Subscribe(Subscription subscr, ReferenceDescription reference)
+			//void Subscribe(Subscription subscr, ReferenceDescription reference)
+			//{
+			//	MonitoredItem monitoredItem = new MonitoredItem(subscr.DefaultItem);
+
+			//	//monitoredItem.DisplayName = subscr.Session.NodeCache.GetDisplayText(reference);
+			//	monitoredItem.DisplayName = reference.DisplayName.Text;
+			//	monitoredItem.StartNodeId = (NodeId)reference.NodeId;
+			//	monitoredItem.NodeClass = (NodeClass)reference.NodeClass;
+			//	monitoredItem.AttributeId = Attributes.Value;
+			//	monitoredItem.SamplingInterval = 0;
+			//	monitoredItem.QueueSize = 1;
+			//	//monitoredItem.Notification += OnNotification;
+
+			//	// add condition fields to any event filter.
+			//	EventFilter filter = monitoredItem.Filter as EventFilter;
+
+			//	if (filter != null)
+			//	{
+			//		monitoredItem.AttributeId = Attributes.EventNotifier;
+			//		monitoredItem.QueueSize = 0;
+			//	}
+
+			//	subscr.AddItem(monitoredItem);
+			//	//subscr.ApplyChanges();
+			//}
+
+			void Subscribe(Subscription subscr, Node anode)
 			{
 				MonitoredItem monitoredItem = new MonitoredItem(subscr.DefaultItem);
 
 				//monitoredItem.DisplayName = subscr.Session.NodeCache.GetDisplayText(reference);
-				monitoredItem.DisplayName = reference.DisplayName.Text;
-				monitoredItem.StartNodeId = (NodeId)reference.NodeId;
-				monitoredItem.NodeClass = (NodeClass)reference.NodeClass;
+				monitoredItem.DisplayName = anode.DisplayName.Text;
+				monitoredItem.StartNodeId = anode.NodeId;
+				monitoredItem.NodeClass = anode.NodeClass;
 				monitoredItem.AttributeId = Attributes.Value;
 				monitoredItem.SamplingInterval = 0;
 				monitoredItem.QueueSize = 1;
@@ -249,73 +275,68 @@ namespace NetCoreConsoleClient
 			ReferenceDescriptionCollection references;
 			Byte[] continuationPoint;
 
-			references = session.FetchReferences(ObjectIds.ObjectsFolder);
+			//references = session.FetchReferences(ObjectIds.ObjectsFolder);
 
-			session.Browse(
-					null,
-					null,
-					ObjectIds.ObjectsFolder,
-					0u,
-					BrowseDirection.Forward,
-					ReferenceTypeIds.HierarchicalReferences,
-					true,
-					(uint)NodeClass.Variable | (uint)NodeClass.Object | (uint)NodeClass.Method,
-					out continuationPoint,
-					out references);
+			//session.Browse(
+			//		null,
+			//		null,
+			//		ObjectIds.ObjectsFolder,
+			//		0u,
+			//		BrowseDirection.Forward,
+			//		ReferenceTypeIds.HierarchicalReferences,
+			//		true,
+			//		(uint)NodeClass.Variable | (uint)NodeClass.Object | (uint)NodeClass.Method,
+			//		out continuationPoint,
+			//		out references);
 
 
-			var rd = references.FirstOrDefault(x => x.DisplayName == "Boilers");
+			//var rd = references.FirstOrDefault(x => x.DisplayName == "Boilers");
 
-			Console.WriteLine(" DisplayName, BrowseName, NodeClass");
-			//foreach (var rd in references)
-			//{
-				Console.WriteLine(" {0}, {1}, {2}", rd.DisplayName, rd.BrowseName, rd.NodeClass);
-				ReferenceDescriptionCollection nextRefs;
-				byte[] nextCp;
-				session.Browse(
-						null,
-						null,
-						ExpandedNodeId.ToNodeId(rd.NodeId, session.NamespaceUris),
-						0u,
-						BrowseDirection.Forward,
-						ReferenceTypeIds.HierarchicalReferences,
-						true,
-						(uint)NodeClass.Variable | (uint)NodeClass.Object | (uint)NodeClass.Method,
-						out nextCp,
-						out nextRefs);
+			//Console.WriteLine(" DisplayName, BrowseName, NodeClass");
+			//Console.WriteLine(" {0}, {1}, {2}", rd.DisplayName, rd.BrowseName, rd.NodeClass);
+			//ReferenceDescriptionCollection nextRefs;
+			//byte[] nextCp;
+			//session.Browse(
+			//		null,
+			//		null,
+			//		ExpandedNodeId.ToNodeId(rd.NodeId, session.NamespaceUris),
+			//		0u,
+			//		BrowseDirection.Forward,
+			//		ReferenceTypeIds.HierarchicalReferences,
+			//		true,
+			//		(uint)NodeClass.Variable | (uint)NodeClass.Object | (uint)NodeClass.Method,
+			//		out nextCp,
+			//		out nextRefs);
 
-			//foreach (var nextRd in nextRefs)
-			//{
-			//	Console.WriteLine("   + {0}, {1}, {2}", nextRd.DisplayName, nextRd.BrowseName, nextRd.NodeClass);
-			//}
-			//}
+			//var boiler2 = nextRefs.FirstOrDefault(x => x.DisplayName == "Boiler #2");
 
-			var boiler2 = nextRefs.FirstOrDefault(x => x.DisplayName == "Boiler #2");
+			//session.Browse(
+			//		null,
+			//		null,
+			//		ExpandedNodeId.ToNodeId(boiler2.NodeId, session.NamespaceUris),
+			//		0u,
+			//		BrowseDirection.Forward,
+			//		ReferenceTypeIds.HierarchicalReferences,
+			//		true,
+			//		(uint)NodeClass.Variable | (uint)NodeClass.Object | (uint)NodeClass.Method,
+			//		out nextCp,
+			//		out nextRefs);
 
-			session.Browse(
-		null,
-		null,
-		ExpandedNodeId.ToNodeId(boiler2.NodeId, session.NamespaceUris),
-		0u,
-		BrowseDirection.Forward,
-		ReferenceTypeIds.HierarchicalReferences,
-		true,
-		(uint)NodeClass.Variable | (uint)NodeClass.Object | (uint)NodeClass.Method,
-		out nextCp,
-		out nextRefs);
+			//var simulation = nextRefs.FirstOrDefault(x => x.DisplayName == "Simulation");
 
-			var simulation = nextRefs.FirstOrDefault(x => x.DisplayName == "Simulation");
+			var node = session.ReadNode(new NodeId("ns=5;i=31"));
+
 
 			Console.WriteLine("5 - Create a subscription with publishing interval of 1/10 second.");
 			exitCode = ExitCode.ErrorCreateSubscription;
 			var subscription = new Subscription(session.DefaultSubscription) { PublishingInterval = 100 };
 
-			Subscribe(subscription, simulation);
+			Subscribe(subscription, node);
 
-            session.Notification += Session_Notification;
+			session.Notification += Session_Notification;
 
 
-      session.AddSubscription(subscription);
+			session.AddSubscription(subscription);
 
 			subscription.Create();
 
@@ -342,13 +363,12 @@ namespace NetCoreConsoleClient
 			exitCode = ExitCode.ErrorRunning;
 		}
 
-        private void Session_Notification(Session session, NotificationEventArgs e)
-        {
-            
-            Console.WriteLine($"Publish Time => {e.NotificationMessage.PublishTime.ToString() }");
-        }
+		private void Session_Notification(Session session, NotificationEventArgs e)
+		{
+			Console.WriteLine($"Publish Time => {e.NotificationMessage.PublishTime.ToString() }");
+		}
 
-        private void Client_KeepAlive(Session sender, KeepAliveEventArgs e)
+		private void Client_KeepAlive(Session sender, KeepAliveEventArgs e)
 		{
 			if (e.Status != null && ServiceResult.IsNotGood(e.Status))
 			{

@@ -78,7 +78,10 @@ namespace TestAsLibrary
 		private void button1_Click(object sender, EventArgs e)
 		{
 			var sampleForm = new SampleClientForm(_application, null, _application.ApplicationConfiguration);
-			sampleForm.Show();
+			if(sampleForm.ShowDialog() == DialogResult.OK)
+			{
+				bool stop = true;
+			}
 		}
 
 	}

@@ -249,10 +249,10 @@ namespace Opc.Ua.Client.Controls
         }
 		#endregion
 
-		private void CloseButton_Click(object sender, EventArgs e)
-		{
-			Application.Exit();
-		}
+		//private void CloseButton_Click(object sender, EventArgs e)
+		//{
+		//	Application.Exit();
+		//}
 	}
 
 	#region ConnectEndpointEventArgs Class

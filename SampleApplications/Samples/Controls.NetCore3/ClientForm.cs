@@ -484,6 +484,5 @@ namespace Opc.Ua.Sample.Controls
                 MessageBox.Show("Unable to launch help documentation. Error: " + ex.Message);
             }
         }
-
-    }
+	}
 }

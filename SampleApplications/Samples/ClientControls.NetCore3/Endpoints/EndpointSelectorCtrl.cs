@@ -247,14 +247,19 @@ namespace Opc.Ua.Client.Controls
 				GuiUtils.HandleException(this.Text, MethodBase.GetCurrentMethod(), exception);
             }
         }
-        #endregion
-    }
-    
-    #region ConnectEndpointEventArgs Class
-    /// <summary>
-    /// Contains arguments for a ConnectEndpoint event.
-    /// </summary>
-    public class ConnectEndpointEventArgs : EventArgs
+		#endregion
+
+		private void CloseButton_Click(object sender, EventArgs e)
+		{
+			Application.Exit();
+		}
+	}
+
+	#region ConnectEndpointEventArgs Class
+	/// <summary>
+	/// Contains arguments for a ConnectEndpoint event.
+	/// </summary>
+	public class ConnectEndpointEventArgs : EventArgs
     {
         /// <summary>
         /// Initializes the object.
